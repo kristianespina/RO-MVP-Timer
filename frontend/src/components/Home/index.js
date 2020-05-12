@@ -3,7 +3,6 @@ import { useHistory, useParams } from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import './Home.css';
-import _ from 'lodash';
 
 import MVPQueue from '../MVPQueue';
 import DetailedView from '../DetailedView';
@@ -12,7 +11,7 @@ import useDebouce from '../../utils/useDebounce';
 
 const mvpDataPlaceholder = {
   'id': '0',
-  'accessKey': '',
+  'accessCode': '',
   'monsterId': '1002',
   'name': 'Poring',
   'lastSeen': '2020-05-12T00:00:00.168Z',
@@ -32,7 +31,7 @@ function Home() {
 
   useEffect(() => {
     async function fetchData() {
-      const res = await fetch("http://localhost:5000/fetchData?acessCode="+accessCode);
+      const res = await fetch("http://localhost:5000/fetchData?acessCode="+debouncedCode);
       res.json()
       .then(res => setMvpData(res));
     }

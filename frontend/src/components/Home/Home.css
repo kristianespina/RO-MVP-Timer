@@ -1,11 +1,11 @@
 body {
   background: #F4F4F4;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
 }
 .main {
   display: flex;
   justify-content: center;
-  align-items: center;
-  min-height: 100vh;
 }
 .container {
   width: auto;

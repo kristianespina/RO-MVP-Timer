@@ -93,10 +93,11 @@ function DetailedView({onChange, data, spotlight}) {
     }
 
     const saveChanges = (event) => {
+        console.log("triggered");
         const res = fetch('http://localhost:5000/saveChanges', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ title: 'React POST Request Example' })
+            body: JSON.stringify(data)
         })
         res
         .then((res) => console.log(res));
