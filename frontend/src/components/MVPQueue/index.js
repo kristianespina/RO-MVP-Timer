@@ -32,9 +32,8 @@ function formatTime(time, prefix = "") {
 }
 
 function MVPQueue({onClick, data}) {
-    console.log(data)
     return (
-        <div className="card" style={divStyle} onClick={() => onClick(data)}>
+        <div className="card" style={divStyle} onClick={() => onClick(data.id)}>
             <img style={monsterImg} src={"http://db.irowiki.org/image/monster/" + data.monsterId +".png"} alt="Monster"/>
             <p style={monsterName}>{data.name}</p>
             <br />

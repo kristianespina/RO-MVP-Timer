@@ -1,8 +1,6 @@
 import React from 'react'
-import { Button } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-
-import IMG_KIEL from './kiel.gif'
 
 const divStyle = {
     width: "630px",
@@ -16,7 +14,7 @@ const divStyle = {
     gridColumn: "1 / span 2",
     gridRow: "2 / span 2",
 }
-const spotlight = {
+const spotlightStyle = {
     width: "440px",
     marginLeft: "auto",
     marginRight: "auto",
@@ -27,28 +25,13 @@ const monsterImg = {
     float: "left",
     objectFit: "cover",
     maxWidth: "250px",
+    minWidth: "200px",
     height: "250px",
     textAlign: "left",
     display: "block",
     marginLeft: "auto",
     marginRight: "auto",
     lineHeight: "250px"
-}
-
-const details = {
-    fontSize: "30px",
-    lineHeight: "35px",
-    marginBottom: "17px",
-    textAlign: "left",
-}
-
-const caption = {
-    fontSize: "14px",
-    fontWeight: "bold",
-    color: "#9B9B9B",
-    lineHeight: "16px",
-    textAlign: "left",
-    textDecoration: "uppercase",
 }
 
 const verticalAlign = {
@@ -62,24 +45,7 @@ const form = {
     marginLeft: "auto",
     marginRight: "auto",
 }
-const formCaption = {
-    fontSize: "20px",
-    lineHeight: "37px",
-    fontWeight: "bold",
-    display: "block",
-    marginBottom: "23px",
-    textAlign: "left",
-}
-const formInput = {
-    background: "#F4F4F4",
-    height: "35px",
-    borderRadius: "15px",
-    border: 0,
-    paddingLeft: "1rem",
-    paddingRight: "1rem",
-    fontSize: "16px",
-    marginBottom: "23px",
-}
+
 const button = {
     width: "100%",
     display: "block",
@@ -87,50 +53,89 @@ const button = {
     height: "48px",
     marginBottom: "17px"
 }
-const notes = {
-    background: "#F4F4F4",
-    borderRadius: "15px",
-    border: 0,
-    paddingLeft: "1rem",
-    paddingRight: "1rem",
-    fontSize: "12px",
-    height: "87px",
-    marginBottom: "23px",
-    resize: "vertical",
-}
 
-function formatTime(time, prefix = "") {
-    return typeof time == "object" ? prefix + time.toLocaleTimeString() : "";
-}
 
-function DetailedView({onChange, data}) {
+function DetailedView({onChange, data, spotlight}) {
+
     const handleChange = (event) => {
-        data.tomb = event.target.value;
-        onChange(data);
+        var data_ = [...data]
+        var index = data.findIndex(obj => obj.id === spotlight);
+        data_[index].tomb = event.target.value;
+        onChange(data_);
     }
+
+    const handleNotes = (event) => {
+        var data_ = [...data]
+        var index = data.findIndex(obj => obj.id === spotlight);
+        data_[index].notes = event.target.value;
+        onChange(data_);
+    }
+
+    const handleName = (event) => {
+        var data_ = [...data]
+        var index = data.findIndex(obj => obj.id === spotlight);
+        data_[index].name = event.target.value;
+        onChange(data_);
+    }
+
+    const handleNextSpawn = (event) => {
+        var data_ = [...data]
+        var index = data.findIndex(obj => obj.id === spotlight);
+        data_[index].nextSpawn = event.target.value;
+        onChange(data_);
+    }
+
+    const handleAuthor = (event) => {
+        var data_ = [...data]
+        var index = data.findIndex(obj => obj.id === spotlight);
+        data_[index].author = event.target.value;
+        onChange(data_);
+    }
+
+    const saveChanges = (event) => {
+        const res = fetch('http://localhost:5000/saveChanges', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ title: 'React POST Request Example' })
+        })
+        res
+        .then((res) => console.log(res));
+    }
+    const selectedData = data.find(x => x.id === spotlight);
     return (
         <div style={divStyle}>
-            <div style={spotlight}>
-                <img style={monsterImg} src={"http://db.irowiki.org/image/monster/" + data.monsterId +".png"} alt="Monster"/>
+            <div style={spotlightStyle}>
+                <img style={monsterImg} src={"http://db.irowiki.org/image/monster/" + selectedData.monsterId +".png"} alt="Monster"/>
                 <div style={verticalAlign}>
                     <div>
-                    <p style={caption}>BOSS NAME</p>
-                    <p style={details}>{data.name}</p>
-                    
-                    <p style={caption}>NEXT SPAWN</p>
-                    <p style={details}>{formatTime(new Date(data.nextSpawn))}</p>
+ 
+                    <TextField style={{marginBottom: "17px", width: "100%"}} label="Boss Name" value={selectedData.name} onChange={handleName}/>
 
-                    <p style={caption}>UPDATED BY</p>
-                    <p style={details}>{data.author}</p>
+                    <TextField
+                        id="time"
+                        label="Next Spawn"
+                        type="time"
+                        style={{marginBottom: "17px", width: "100%"}}
+                        value={selectedData.nextSpawn}
+                        InputLabelProps={{
+                        shrink: true,
+                        }}
+                        inputProps={{
+                        step: 60, // 5 min
+                        }}
+                        onChange={handleNextSpawn}
+                    />
+
+                    <TextField style={{marginBottom: "17px", width: "100%"}} label="Author" value={selectedData.author} onChange={handleAuthor} />
                     </div>
                 </div>
             </div>
             <br />
             <div style={form}>
-                <div style={{marginBottom: "17px"}}><TextField id="standard-basic" fullWidth label="Tomb Location" value={data.tomb} onChange={handleChange}/></div>
-                <div style={{marginBottom: "17px"}}><TextField id="standard-basic" fullWidth multiline rows={4} label="Notes" defaultValue={data.notes} /></div>
+                <div style={{marginBottom: "17px"}}><TextField id="standard-basic" fullWidth label="Tomb Location" value={selectedData.tomb} onChange={handleChange}/></div>
+                <div style={{marginBottom: "17px"}}><TextField id="standard-basic" fullWidth multiline rows={4} label="Notes" value={selectedData.notes} onChange={handleNotes}/></div>
                 <Button style={button} variant="contained" color="primary">MVP P*WNED</Button>
-                <Button style={button} variant="outlined" color="primary">Save Changes</Button>
+                <Button style={button} variant="outlined" color="primary" onClick={saveChanges}>Save Changes</Button>
             </div>
         </div>
     )
