@@ -95,15 +95,19 @@ function DetailedView({onChange, data, spotlight}) {
     const updateTime = async () => {
         var data_ = [...data]
         var index = data.findIndex(obj => obj.id === spotlight);
+
+        const zeroPad = (num, places) => String(num).padStart(places, '0')
+
         const minSpawnTime = data_[index].minSpawnTime
         const hourIncrement = Math.floor(minSpawnTime/60)
         const minuteIncrement = Math.floor(minSpawnTime%60)
-        var nextSpawn = data_[index].nextSpawn
-        var hour = parseInt(nextSpawn.substr(0,2)) + hourIncrement
-        var minute = parseInt(nextSpawn.substr(3,4)) + minuteIncrement
-        console.log(hour)
-        console.log(minute)
-        
+        const now = new Date
+
+        const minute = (now.getMinutes() + minuteIncrement)%60
+        const hour = (now.getHours() + hourIncrement + Math.floor( (parseInt(now.getMinutes()) + minuteIncrement)/60 ))%24
+
+        const nextSpawn = zeroPad(hour, 2) + ":" + zeroPad(minute, 2)
+        console.log(nextSpawn)
     }
 
     const saveChanges = (event) => {
