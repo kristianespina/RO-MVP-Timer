@@ -92,6 +92,20 @@ function DetailedView({onChange, data, spotlight}) {
         onChange(data_);
     }
 
+    const updateTime = async () => {
+        var data_ = [...data]
+        var index = data.findIndex(obj => obj.id === spotlight);
+        const minSpawnTime = data_[index].minSpawnTime
+        const hourIncrement = Math.floor(minSpawnTime/60)
+        const minuteIncrement = Math.floor(minSpawnTime%60)
+        var nextSpawn = data_[index].nextSpawn
+        var hour = parseInt(nextSpawn.substr(0,2)) + hourIncrement
+        var minute = parseInt(nextSpawn.substr(3,4)) + minuteIncrement
+        console.log(hour)
+        console.log(minute)
+        
+    }
+
     const saveChanges = (event) => {
         console.log("triggered");
         const res = fetch('http://localhost:5000/saveChanges', {
@@ -135,7 +149,7 @@ function DetailedView({onChange, data, spotlight}) {
             <div style={form}>
                 <div style={{marginBottom: "17px"}}><TextField id="standard-basic" fullWidth label="Tomb Location" value={selectedData.tomb} onChange={handleChange}/></div>
                 <div style={{marginBottom: "17px"}}><TextField id="standard-basic" fullWidth multiline rows={4} label="Notes" value={selectedData.notes} onChange={handleNotes}/></div>
-                <Button style={button} variant="contained" color="primary">MVP P*WNED</Button>
+                <Button style={button} variant="contained" color="primary" onClick={updateTime}>MVP P*WNED</Button>
                 <Button style={button} variant="outlined" color="primary" onClick={saveChanges}>Save Changes</Button>
             </div>
         </div>

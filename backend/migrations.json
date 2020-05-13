@@ -47,7 +47,9 @@
   "tomb": "odin_tem03",
   "isExactTime": "true",
   "notes": "",
-  "author": "Akatsuki"
+  "author": "Akatsuki",
+  "minSpawnTime": 480,
+  "maxSpawnTime": 490
 },{
   "id": "4",
   "accessCode": "",
@@ -59,8 +61,8 @@
   "isExactTime": "true",
   "notes": "",
   "author": "Akatsuki",
-  "minSpawnTime": 480,
-  "maxSpawnTime": 490
+  "minSpawnTime": 60,
+  "maxSpawnTime": 70
 },{
   "id": "5",
   "accessCode": "",
