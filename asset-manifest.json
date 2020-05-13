@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/kristianespina/RO-MVP-Timer/static/css/main.1003a109.chunk.css",
+    "main.js": "/kristianespina/RO-MVP-Timer/static/js/main.daa34d42.chunk.js",
+    "main.js.map": "/kristianespina/RO-MVP-Timer/static/js/main.daa34d42.chunk.js.map",
+    "runtime-main.js": "/kristianespina/RO-MVP-Timer/static/js/runtime-main.a6fe79e1.js",
+    "runtime-main.js.map": "/kristianespina/RO-MVP-Timer/static/js/runtime-main.a6fe79e1.js.map",
+    "static/js/2.0365cd7f.chunk.js": "/kristianespina/RO-MVP-Timer/static/js/2.0365cd7f.chunk.js",
+    "static/js/2.0365cd7f.chunk.js.map": "/kristianespina/RO-MVP-Timer/static/js/2.0365cd7f.chunk.js.map",
+    "index.html": "/kristianespina/RO-MVP-Timer/index.html",
+    "precache-manifest.65d807bcf0c08e23b1584052cd701692.js": "/kristianespina/RO-MVP-Timer/precache-manifest.65d807bcf0c08e23b1584052cd701692.js",
+    "service-worker.js": "/kristianespina/RO-MVP-Timer/service-worker.js",
+    "static/css/main.1003a109.chunk.css.map": "/kristianespina/RO-MVP-Timer/static/css/main.1003a109.chunk.css.map",
+    "static/js/2.0365cd7f.chunk.js.LICENSE.txt": "/kristianespina/RO-MVP-Timer/static/js/2.0365cd7f.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a6fe79e1.js",
+    "static/js/2.0365cd7f.chunk.js",
+    "static/css/main.1003a109.chunk.css",
+    "static/js/main.daa34d42.chunk.js"
+  ]
+}
