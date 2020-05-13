@@ -21,6 +21,16 @@ const mvpDataPlaceholder = {
   'notes': '',
   'author': 'Loading',
 }
+
+function descendingDate(a,b) {
+  if (a.nextSpawn < b.nextSpawn)
+    return -1
+  else if (a.nextSpawn > b.nextSpawn)
+    return 1
+  else
+    return 0
+}
+
 function Home() {
   const [mvpData, setMvpData] = useState([mvpDataPlaceholder])
   const [spotlight, setSpotlight] = useState('0')
@@ -33,7 +43,10 @@ function Home() {
     async function fetchData() {
       const res = await fetch("http://localhost:5000/fetchData?accessCode="+debouncedCode);
       res.json()
-      .then(res => setMvpData(res));
+      .then(res => {
+        setMvpData(res.sort(descendingDate));
+        setSpotlight(res[0]["id"]);
+      })
     }
     
     fetchData();

@@ -53,7 +53,14 @@ const button = {
     height: "48px",
     marginBottom: "17px"
 }
-
+function descendingDate(a,b) {
+    if (a.nextSpawn < b.nextSpawn)
+      return -1
+    else if (a.nextSpawn > b.nextSpawn)
+      return 1
+    else
+      return 0
+  }
 
 function DetailedView({onChange, data, spotlight}) {
 
@@ -81,8 +88,15 @@ function DetailedView({onChange, data, spotlight}) {
     const handleNextSpawn = (event) => {
         var data_ = [...data]
         var index = data.findIndex(obj => obj.id === spotlight);
-        data_[index].nextSpawn = event.target.value;
-        onChange(data_);
+        
+        const hours = event.target.value.substr(0,2)
+        const minutes = event.target.value.substr(3,4)
+
+        var nextSpawn = new Date(data_[index].nextSpawn)
+        nextSpawn.setHours(parseInt(hours))
+        nextSpawn.setMinutes(parseInt(minutes))
+        data_[index].nextSpawn = nextSpawn.toISOString()
+        onChange(data_.sort(descendingDate));
     }
 
     const handleAuthor = (event) => {
@@ -91,27 +105,27 @@ function DetailedView({onChange, data, spotlight}) {
         data_[index].author = event.target.value;
         onChange(data_);
     }
+    
+    const zeroPad = (num, places) => String(num).padStart(places, '0')
+    const parseTime = (datetime) => {
+        const date = new Date(datetime)
+        return zeroPad(date.getHours(), 2) + ":" + zeroPad(date.getMinutes(), 2)
+    }
 
     const updateTime = async () => {
         var data_ = [...data]
         var index = data.findIndex(obj => obj.id === spotlight);
 
-        const zeroPad = (num, places) => String(num).padStart(places, '0')
-
         const minSpawnTime = data_[index].minSpawnTime
-        const hourIncrement = Math.floor(minSpawnTime/60)
-        const minuteIncrement = Math.floor(minSpawnTime%60)
-        const now = new Date
-
-        const minute = (now.getMinutes() + minuteIncrement)%60
-        const hour = (now.getHours() + hourIncrement + Math.floor( (parseInt(now.getMinutes()) + minuteIncrement)/60 ))%24
-
-        const nextSpawn = zeroPad(hour, 2) + ":" + zeroPad(minute, 2)
-        console.log(nextSpawn)
+        const now = new Date()
+        
+        data_[index].lastSeen = now
+        data_[index].nextSpawn = new Date(now.getTime() + minSpawnTime*60000);
+        onChange(data_.sort(descendingDate));
+        saveChanges()
     }
 
     const saveChanges = (event) => {
-        console.log("triggered");
         const res = fetch('http://localhost:5000/saveChanges', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -135,12 +149,12 @@ function DetailedView({onChange, data, spotlight}) {
                         label="Next Spawn"
                         type="time"
                         style={{marginBottom: "17px", width: "100%"}}
-                        value={selectedData.nextSpawn}
+                        value={parseTime(selectedData.nextSpawn)}
                         InputLabelProps={{
                         shrink: true,
                         }}
                         inputProps={{
-                        step: 60, // 5 min
+                        step: 60, // 1 min
                         }}
                         onChange={handleNextSpawn}
                     />
