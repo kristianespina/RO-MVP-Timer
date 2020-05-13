@@ -62,6 +62,3 @@ def post():
     trackerinfo.delete_many({"accessCode": accessCode})
     trackerinfo.insert_many(content)
     return "OK"
-
-if __name__ == '__main__':
-    app.run()
