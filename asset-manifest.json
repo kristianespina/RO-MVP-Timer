@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/kristianespina/RO-MVP-Timer/static/css/main.1003a109.chunk.css",
-    "main.js": "/kristianespina/RO-MVP-Timer/static/js/main.1d29306a.chunk.js",
-    "main.js.map": "/kristianespina/RO-MVP-Timer/static/js/main.1d29306a.chunk.js.map",
-    "runtime-main.js": "/kristianespina/RO-MVP-Timer/static/js/runtime-main.a6fe79e1.js",
-    "runtime-main.js.map": "/kristianespina/RO-MVP-Timer/static/js/runtime-main.a6fe79e1.js.map",
-    "static/js/2.0365cd7f.chunk.js": "/kristianespina/RO-MVP-Timer/static/js/2.0365cd7f.chunk.js",
-    "static/js/2.0365cd7f.chunk.js.map": "/kristianespina/RO-MVP-Timer/static/js/2.0365cd7f.chunk.js.map",
-    "index.html": "/kristianespina/RO-MVP-Timer/index.html",
-    "precache-manifest.89bc1a90601311a35314c767511942ad.js": "/kristianespina/RO-MVP-Timer/precache-manifest.89bc1a90601311a35314c767511942ad.js",
-    "service-worker.js": "/kristianespina/RO-MVP-Timer/service-worker.js",
-    "static/css/main.1003a109.chunk.css.map": "/kristianespina/RO-MVP-Timer/static/css/main.1003a109.chunk.css.map",
-    "static/js/2.0365cd7f.chunk.js.LICENSE.txt": "/kristianespina/RO-MVP-Timer/static/js/2.0365cd7f.chunk.js.LICENSE.txt"
+    "main.css": "/RO-MVP-Timer/static/css/main.1003a109.chunk.css",
+    "main.js": "/RO-MVP-Timer/static/js/main.49b332c9.chunk.js",
+    "main.js.map": "/RO-MVP-Timer/static/js/main.49b332c9.chunk.js.map",
+    "runtime-main.js": "/RO-MVP-Timer/static/js/runtime-main.b93bcb7c.js",
+    "runtime-main.js.map": "/RO-MVP-Timer/static/js/runtime-main.b93bcb7c.js.map",
+    "static/js/2.0365cd7f.chunk.js": "/RO-MVP-Timer/static/js/2.0365cd7f.chunk.js",
+    "static/js/2.0365cd7f.chunk.js.map": "/RO-MVP-Timer/static/js/2.0365cd7f.chunk.js.map",
+    "index.html": "/RO-MVP-Timer/index.html",
+    "precache-manifest.4eec3d37a476f22456e0af3571d2864a.js": "/RO-MVP-Timer/precache-manifest.4eec3d37a476f22456e0af3571d2864a.js",
+    "service-worker.js": "/RO-MVP-Timer/service-worker.js",
+    "static/css/main.1003a109.chunk.css.map": "/RO-MVP-Timer/static/css/main.1003a109.chunk.css.map",
+    "static/js/2.0365cd7f.chunk.js.LICENSE.txt": "/RO-MVP-Timer/static/js/2.0365cd7f.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.a6fe79e1.js",
+    "static/js/runtime-main.b93bcb7c.js",
     "static/js/2.0365cd7f.chunk.js",
     "static/css/main.1003a109.chunk.css",
-    "static/js/main.1d29306a.chunk.js"
+    "static/js/main.49b332c9.chunk.js"
   ]
 }
