@@ -59,4 +59,5 @@ def post():
     trackerinfo.insert_many(content)
     return "OK"
 
-app.run()
+if __name__ == '__main__':
+    app.run()
