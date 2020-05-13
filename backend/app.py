@@ -11,13 +11,21 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 app.config["DEBUG"] = True
 client = MongoClient("mongodb+srv://cluster0-1vdvj.gcp.mongodb.net/test", username="mvptracker", password="mvptracker")
 db = client.mvptracker
-collection = db.trackerinfo
+
+trackerinfo = db.trackerinfo
+
+mvpdata = db.mvpdata.find({})
+mvpdata_bson = loads(dumps(mvpdata))
 
 
-def fetch_data(accessCode, newAccesCode=""):
-    response = loads(dumps(collection.find({"accessCode": accessCode})))
+def fetch_data(accessCode):
+    response = loads(dumps(trackerinfo.find({"accessCode": accessCode})))
+    return response
+
+def create_data(accessCode):
+    response = mvpdata_bson
     for i in range(len(response)):
-        response[i]['accessCode'] = newAccesCode
+        response[i]['accessCode'] = accessCode
     return response
 
 @app.route('/fetchData', methods=['GET', 'OPTIONS'])
@@ -25,9 +33,11 @@ def fetch_data(accessCode, newAccesCode=""):
 def home():
     monsters = []
     accessCode = request.args.get('accessCode')
+    if accessCode == "undefined":
+        accessCode = ""
     monsters = fetch_data(accessCode)
     if not monsters:
-        monsters = fetch_data("", accessCode)
+        monsters = create_data(accessCode)
     sorted_monsters = sorted(monsters, key=lambda k: k['nextSpawn'])
 
     response = Response(dumps(sorted_monsters))
@@ -40,7 +50,13 @@ def post():
     
     # get accessCode
     accessCode = content[0]['accessCode']
-    
+
+    # drop $_id key
+    for monster in content:
+        del monster['_id']
+
+    trackerinfo.delete_many({"accessCode": accessCode})
+    trackerinfo.insert_many(content)
     return "OK"
 
 app.run()
