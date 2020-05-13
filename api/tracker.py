@@ -28,6 +28,10 @@ def create_data(accessCode):
         response[i]['accessCode'] = accessCode
     return response
 
+@app.route('/', methods=['GET', 'OPTIONS'])
+def catch_root():
+    return home()
+
 @app.route('/fetchData', methods=['GET', 'OPTIONS'])
 @cross_origin()
 def home():
