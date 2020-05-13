@@ -21,5 +21,3 @@ mvpdata_bson = loads(dumps(mvpdata))
 @app.route('/<path:path>')
 def catch_all(path):
     return Response(dumps(mvpdata_bson), mimetype="text/html")
-
-app.run()
