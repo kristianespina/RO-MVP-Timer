@@ -31,7 +31,7 @@ function Home() {
 
   useEffect(() => {
     async function fetchData() {
-      const res = await fetch("http://localhost:5000/fetchData?acessCode="+debouncedCode);
+      const res = await fetch("http://localhost:5000/fetchData?accessCode="+debouncedCode);
       res.json()
       .then(res => setMvpData(res));
     }

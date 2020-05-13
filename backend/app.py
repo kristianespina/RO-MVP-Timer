@@ -16,8 +16,8 @@ collection = db.trackerinfo
 
 def fetch_data(accessCode, newAccesCode=""):
     response = loads(dumps(collection.find({"accessCode": accessCode})))
-    for res in response:
-        print(res) # todo replace accessCode
+    for i in range(len(response)):
+        response[i]['accessCode'] = newAccesCode
     return response
 
 @app.route('/fetchData', methods=['GET', 'OPTIONS'])
@@ -27,7 +27,7 @@ def home():
     accessCode = request.args.get('accessCode')
     monsters = fetch_data(accessCode)
     if not monsters:
-        monsters = fetch_data("")
+        monsters = fetch_data("", accessCode)
     sorted_monsters = sorted(monsters, key=lambda k: k['nextSpawn'])
 
     response = Response(dumps(sorted_monsters))
@@ -37,7 +37,10 @@ def home():
 @cross_origin()
 def post():
     content = request.get_json(force=True) # Ignore mime-type and always try to parse JSON
-    print(content)
+    
+    # get accessCode
+    accessCode = content[0]['accessCode']
+    
     return "OK"
 
 app.run()
