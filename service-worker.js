@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/RO-MVP-Timer/precache-manifest.43dca8a0821666a96746b2034b0cc76f.js"
+  "/RO-MVP-Timer/precache-manifest.be1c30ca5976b6b6463ea31069b3fbed.js"
 );
 
 self.addEventListener('message', (event) => {
