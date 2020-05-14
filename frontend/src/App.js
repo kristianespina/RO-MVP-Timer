@@ -7,7 +7,7 @@ function App() {
   return (
     <main>
     <Switch>
-      <Route path='/access/:accessCode?' component={Home} />
+      <Route path='/:accessCode?' component={Home} />
     </Switch>
     </main>
   );

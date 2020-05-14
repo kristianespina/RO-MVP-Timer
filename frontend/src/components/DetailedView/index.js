@@ -126,7 +126,7 @@ function DetailedView({onChange, data, spotlight}) {
     }
 
     const saveChanges = (event) => {
-        const res = fetch('http://localhost:5000/saveChanges', {
+        const res = fetch('https://ro-mvp-timer.now.sh/api/saveChanges', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)

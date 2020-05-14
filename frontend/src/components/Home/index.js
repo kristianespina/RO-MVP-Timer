@@ -41,7 +41,7 @@ function Home() {
 
   useEffect(() => {
     async function fetchData() {
-      const res = await fetch("http://localhost:5000/fetchData?accessCode="+debouncedCode);
+      const res = await fetch("https://ro-mvp-timer.now.sh/api/fetchData?accessCode="+debouncedCode);
       res.json()
       .then(res => {
         setMvpData(res.sort(descendingDate));
@@ -54,7 +54,7 @@ function Home() {
 
   const handleChangeAccessCode = (event) => {
         accessCode = event.target.value
-        history.push('/access/'+accessCode);
+        history.push('/'+accessCode);
   }
   return (
     <div className="main">
