@@ -21,7 +21,7 @@
 
 Well, what good is a wall of text when we can just show screenshots, right?
 
-![MVP Tracker Screenshot](docs/screely-1589444575763.png)
+![MVP Tracker Screenshot](docs/screely.png)
 
 <!-- GETTING STARTED -->
 ## Getting Started
